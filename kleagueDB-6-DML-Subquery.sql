@@ -68,7 +68,7 @@ ORDER 	BY TEAM_NAME;
 -------------------------------------------
 -- 1.3 비연관, 다중행 서브쿼리
 -------------------------------------------
-SELECT * FROM PLAYER;
+
 -- Q: 각 팀에서 제일 키가 작은 선수들을 검색
 
 SELECT TEAM_ID, PLAYER_NAME, POSITION, HEIGHT
@@ -127,17 +127,6 @@ WHERE	(TEAM_ID, HEIGHT) IN 	(				/* 비연관, 다중행 서브쿼리 */
 ORDER	BY TEAM_ID;
 
 -- Q: 소속 팀의 평균 키보다 작은 선수들을 검색.
-
-
-SELECT	TEAM_ID, PLAYER_NAME 선수명, POSITION 포지션, BACK_NO 백넘버, HEIGHT 키 
-FROM	PLAYER P1
-WHERE	P1.HEIGHT < (	
-						SELECT	AVG(P2.HEIGHT) 
-						FROM	PLAYER P2
-						WHERE	P2.TEAM_ID = P1.TEAM_ID
-					)
-ORDER	BY P1.TEAM_ID, 키 DESC, 선수명;
-
 
 -------------------------------------------
 -- 1.5 연관, 다중값 서브쿼리
@@ -390,7 +379,7 @@ ORDER 	BY 팀명, 선수명;
 
 -- TEMUUJIN'S WAY TO HANDLE LIKE A PRO.
 SELECT PLAYER_NAME , PLAYER_ID, POSITION , T.TEAM_ID,T.TEAM_NAME
-FROM PLAYER JOIN TEAM T ON PLAYER.TEAM_ID = T.TEAM_ID
+FROM PLAYER JOIN TEAM T USING(TEAM_ID)
 WHERE PLAYER.POSITION = 'MF'
 ORDER BY TEAM_ID;
 
@@ -439,12 +428,9 @@ HAVING	AVG(P.HEIGHT) < (
 							FROM	PLAYER 
 							WHERE	TEAM_ID ='K02' 
 						);
-
- 
 -------------------------------------------
 -- 3. 갱신문의 서브쿼리
 -------------------------------------------
-
 -------------------------------------------
 -- 3.1 UPDATE 문 서브쿼리
 -------------------------------------------

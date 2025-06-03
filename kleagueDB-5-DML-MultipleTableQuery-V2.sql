@@ -117,7 +117,6 @@ WHERE 	X.TEAM_ID = 'K02' AND
 ORDER 	BY 1, 2, 3, 4, 5;
 
 
-
 -------------------------------------------
 -- 1.3 EXCEPT 연산
 -------------------------------------------
@@ -174,9 +173,9 @@ SELECT 	PLAYER.PLAYER_NAME, PLAYER.BACK_NO, PLAYER.TEAM_ID,
 		TEAM.TEAM_NAME, TEAM.REGION_NAME 
 FROM 	PLAYER JOIN TEAM ON PLAYER.TEAM_ID = TEAM.TEAM_ID; 		/* FROM 절 조인 */
 
+
 -- Q: 포지션이 ‘GK’인 선수들의 이름, 백넘버, 소속 팀명 및 팀 연고지를 검색하라. 
 --    단, 백넘버의 오름차순으로 출력하라. (아래 두 질의의 결과는 동일함)
-
 
 SELECT 	PLAYER.PLAYER_NAME, PLAYER.BACK_NO, PLAYER.TEAM_ID,
 		TEAM.TEAM_NAME, TEAM.REGION_NAME
@@ -426,6 +425,7 @@ FROM 	TEAM T
 		JOIN PLAYER P ON P.TEAM_ID = T.TEAM_ID
 ORDER 	BY 선수명;
 
+SELECT * FROM SCHEDULE;
 
 -- Q: 다중 테이블 조인 2
 -- 홈팀이 3점 이상 차이로 승리한 경기의 경기장명, 경기 일정, 홈팀명과 원정팀명을 출력함.
@@ -597,11 +597,8 @@ ORDER BY mgr.Fname;
 
 SELECT	CONCAT(emp.Fname, ' ', emp.Minit, '. ', emp.Lname) AS Employee, 
 		CONCAT(mgr.Fname, ' ', mgr.Minit, '. ', mgr.Lname) AS Manager
-FROM  	employee emp JOIN employee mgr ON emp.Super_ssn=mgr.Ssn;
-
-SELECT	CONCAT(emp.Fname, ' ', emp.Minit, '. ', emp.Lname) AS Employee, 
-		CONCAT(mgr.Fname, ' ', mgr.Minit, '. ', mgr.Lname) AS Manager
 FROM  	employee emp LEFT JOIN employee mgr ON emp.Super_ssn=mgr.Ssn;
+
 
 SELECT 	CONCAT(emp.Fname, ' ', emp.Minit, '. ', emp.Lname) AS Employee, 
 		CONCAT(mgr.Fname, ' ', mgr.Minit, '. ', mgr.Lname) AS Manager,
